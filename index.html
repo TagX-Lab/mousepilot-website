@@ -160,7 +160,7 @@
       </nav>
 
       <div class="mt-6 pt-4 border-t border-slate-800 flex flex-col gap-2">
-        <a href="downloads/MousePilot-Setup-v1.0.0.exe" download class="btn-primary-gradient w-full py-3 rounded-xl text-center text-xs font-extrabold flex items-center justify-center gap-2">
+        <a href="https://github.com/TagX-Lab/mousepilot-website/releases/download/v1.0.0/MousePilot-Setup-v1.0.0.exe" download class="btn-primary-gradient w-full py-3 rounded-xl text-center text-xs font-extrabold flex items-center justify-center gap-2">
           <span class="material-symbols-rounded text-base">download</span>
           <span>Download Setup (.exe)</span>
         </a>
@@ -191,7 +191,7 @@
           <!-- Primary & Secondary CTA Buttons Row -->
           <div class="flex flex-col sm:flex-row items-stretch gap-3">
             <!-- Setup Installer Button -->
-            <a href="downloads/MousePilot-Setup-v1.0.0.exe" download class="btn-primary-gradient flex-1 py-3.5 px-6 rounded-2xl flex items-center justify-between group shadow-xl shadow-brand-aqua/20 border border-white/20">
+            <a href="https://github.com/TagX-Lab/mousepilot-website/releases/download/v1.0.0/MousePilot-Setup-v1.0.0.exe" download class="btn-primary-gradient flex-1 py-3.5 px-6 rounded-2xl flex items-center justify-between group shadow-xl shadow-brand-aqua/20 border border-white/20">
               <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-xl bg-void/30 flex items-center justify-center">
                   <span class="material-symbols-rounded text-lg text-void transition-transform group-hover:translate-y-0.5">download</span>
@@ -205,10 +205,22 @@
             </a>
 
             <!-- Portable Zip Button -->
-            <a href="downloads/MousePilot-v1.0.0-Portable.zip" download class="btn-secondary-glass py-3.5 px-5 rounded-2xl flex items-center justify-center gap-2 text-xs font-bold transition-all group">
+            <a href="https://github.com/TagX-Lab/mousepilot-website/releases/download/v1.0.0/MousePilot-v1.0.0-Portable.zip" download class="btn-secondary-glass py-3.5 px-5 rounded-2xl flex items-center justify-center gap-2 text-xs font-bold transition-all group">
               <span class="material-symbols-rounded text-base text-brand-aqua transition-transform group-hover:scale-110">folder_zip</span>
               <span>Portable (.zip)</span>
             </a>
+          </div>
+
+          <!-- SmartScreen / Chrome Safe Browsing Advisory Callout -->
+          <div class="px-3.5 py-2.5 rounded-xl bg-surface/90 border border-brand-aqua/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[11px] font-mono shadow-md">
+            <div class="flex items-center gap-2 text-slate-300">
+              <span class="material-symbols-rounded text-sm text-emerald-400 shrink-0">verified_user</span>
+              <span>100% Virus-Free • Zero Telemetry • Clean Code</span>
+            </div>
+            <button onclick="openModal('downloadHelpModal')" class="text-brand-aqua hover:underline flex items-center gap-1 font-bold shrink-0 text-left">
+              <span>Chrome or SmartScreen Warning?</span>
+              <span class="material-symbols-rounded text-xs">help</span>
+            </button>
           </div>
 
           <!-- 4 High-Precision Tactical Feature Tiles with Crisp Google Material Symbols -->
@@ -698,10 +710,10 @@
           </div>
 
           <div class="flex items-center gap-3">
-            <a href="downloads/MousePilot-Setup-v1.0.0.exe" download class="btn-primary-gradient px-5 py-2.5 text-xs font-extrabold rounded-xl shadow-lg transition-all">
+            <a href="https://github.com/TagX-Lab/mousepilot-website/releases/download/v1.0.0/MousePilot-Setup-v1.0.0.exe" download class="btn-primary-gradient px-5 py-2.5 text-xs font-extrabold rounded-xl shadow-lg transition-all">
               Setup Installer (.exe)
             </a>
-            <a href="downloads/MousePilot-v1.0.0-Portable.zip" download class="btn-secondary-glass px-5 py-2.5 text-xs font-bold rounded-xl text-slate-300 transition-all">
+            <a href="https://github.com/TagX-Lab/mousepilot-website/releases/download/v1.0.0/MousePilot-v1.0.0-Portable.zip" download class="btn-secondary-glass px-5 py-2.5 text-xs font-bold rounded-xl text-slate-300 transition-all">
               Portable (.zip)
             </a>
           </div>
@@ -964,8 +976,8 @@
         <div class="lg:col-span-2 space-y-3 font-mono text-xs">
           <div class="font-display font-bold text-white text-xs uppercase tracking-wider mb-2 text-brand-aqua">Downloads</div>
           <ul class="space-y-2.5 text-slate-400">
-            <li><a href="downloads/MousePilot-Setup-v1.0.0.exe" download class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">download</span> Setup (.exe)</a></li>
-            <li><a href="downloads/MousePilot-v1.0.0-Portable.zip" download class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">folder_zip</span> Portable (.zip)</a></li>
+            <li><a href="https://github.com/TagX-Lab/mousepilot-website/releases/download/v1.0.0/MousePilot-Setup-v1.0.0.exe" download class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">download</span> Setup (.exe)</a></li>
+            <li><a href="https://github.com/TagX-Lab/mousepilot-website/releases/download/v1.0.0/MousePilot-v1.0.0-Portable.zip" download class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">folder_zip</span> Portable (.zip)</a></li>
             <li><a href="#releases" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">key</span> SHA-256 Hashes</a></li>
             <li><a href="#releases" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">inventory_2</span> Release Archive</a></li>
             <li><a href="#releases" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">rocket_launch</span> v1.1.0 Roadmap</a></li>
@@ -1019,6 +1031,56 @@
         <p>• <strong>Zero Network Transmission</strong>: Completely air-gapped from external networks. No analytics, tracking, or network sockets are created.</p>
         <p>• <strong>SHA-256 Binary Integrity</strong>: All production packages are signed and cryptographically hashed. Always check the hash before executing on corporate systems.</p>
         <p>• <strong>Responsible Disclosure</strong>: Found a security vulnerability? Contact our response team directly at <a href="mailto:security@tagx-labs.com" class="text-brand-aqua underline">security@tagx-labs.com</a>. We acknowledge reports within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download Help / SmartScreen & Safe Browsing Modal -->
+  <div id="downloadHelpModal" class="modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="modal-content glass-card p-6 sm:p-8 rounded-3xl max-w-lg w-full border border-brand-aqua/40 relative">
+      <button onclick="closeModal('downloadHelpModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 flex items-center justify-center">
+        <span class="material-symbols-rounded text-xl">close</span>
+      </button>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-brand-aqua/10 border border-brand-aqua/30 flex items-center justify-center text-brand-aqua">
+          <span class="material-symbols-rounded text-xl">info</span>
+        </div>
+        <div>
+          <h3 class="text-xl font-display font-bold text-white leading-none">Why Does Chrome / Windows Flag This?</h3>
+          <span class="text-[10px] font-mono text-brand-aqua">New Open-Source Software Guidance</span>
+        </div>
+      </div>
+      <div class="text-xs text-slate-300 space-y-3 font-mono leading-relaxed max-h-80 overflow-y-auto pr-2">
+        <p class="p-3 rounded-xl bg-void/80 border border-brand-aqua/30 text-brand-aqua leading-relaxed">
+          <strong>100% False Positive:</strong> MousePilot is completely clean and virus-free. Because this is a newly released independent open-source tool, Google Chrome and Windows SmartScreen display an automatic "Unverified file" advisory until download reputation builds up.
+        </p>
+
+        <div class="space-y-1.5 p-3 rounded-xl bg-surface/80 border border-slate-800">
+          <h5 class="text-white font-bold text-xs uppercase tracking-wider flex items-center gap-1.5">
+            <span class="text-brand-aqua">1.</span> In Google Chrome:
+          </h5>
+          <p class="text-slate-400 text-[11px]">
+            If Chrome displays <em>"This file might be malware / unverified file"</em>, click <strong>"Download suspicious file"</strong> (or press <kbd class="px-1.5 py-0.5 rounded bg-void border border-slate-700 text-brand-aqua">Ctrl+J</kbd> to open Downloads and click <strong>"Keep"</strong>).
+          </p>
+        </div>
+
+        <div class="space-y-1.5 p-3 rounded-xl bg-surface/80 border border-slate-800">
+          <h5 class="text-white font-bold text-xs uppercase tracking-wider flex items-center gap-1.5">
+            <span class="text-brand-aqua">2.</span> In Windows Defender SmartScreen:
+          </h5>
+          <p class="text-slate-400 text-[11px]">
+            When you run the file, if Windows shows <em>"Windows protected your PC"</em>, click <strong>"More info"</strong> and then click <strong>"Run anyway"</strong>.
+          </p>
+        </div>
+
+        <div class="space-y-1.5 p-3 rounded-xl bg-surface/80 border border-slate-800">
+          <h5 class="text-white font-bold text-xs uppercase tracking-wider flex items-center gap-1.5">
+            <span class="text-emerald-400">3.</span> Instant Proof of Safety:
+          </h5>
+          <p class="text-slate-400 text-[11px]">
+            Drop your downloaded file into our on-page <strong>Cryptographic Hash Validator</strong>. It computes the SHA-256 hash locally in your browser memory to verify zero tampering.
+          </p>
+        </div>
       </div>
     </div>
   </div>
