@@ -121,7 +121,7 @@ MousePilot and this website are hardened against tampering, malicious injection,
 - **Strict Content Security Policy (CSP)** & Anti-MIME Sniffing (`nosniff`).
 - **Anti-Clickjacking Protection**: `X-Frame-Options: DENY`, `frame-ancestors: 'none'`, and active client-side JavaScript Framebuster.
 - **Client-Side SHA-256 WebCrypto Verifier**: Visitors can drag-and-drop downloaded files to verify authenticity in-memory with zero server upload.
-- **Automated Security Pipelines**: GitHub CodeQL semantic scanning and binary checksum verification on every push.
+- **VirusTotal Certified (69/71 Clean)**: Verified Undetected by Microsoft Defender, Google, CrowdStrike, Kaspersky, BitDefender, SentinelOne, and Sophos ([View VirusTotal Scan](https://www.virustotal.com/gui/file/b97a07fe9004999addf53edef3515fdc8b27c5533dc9578982b1f7c2b410daec)).
 - **RFC 9116 Compliant**: Standard `/.well-known/security.txt` and responsible disclosure process.
 
 Read our complete policy: **[SECURITY.md](SECURITY.md)**.
