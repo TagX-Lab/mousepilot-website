@@ -1,0 +1,89 @@
+/* ==========================================================================
+   MousePilot — High-Performance GPU-Accelerated Animations
+   ========================================================================== */
+
+/* 1. Aurora Atmosphere Pulse (GPU Transform only) */
+@keyframes auroraPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.08) translate3d(15px, -10px, 0);
+  }
+}
+
+.aurora-orb-aqua { animation: auroraPulse 16s ease-in-out infinite; }
+.aurora-orb-crimson { animation: auroraPulse 20s ease-in-out infinite 2s; }
+.aurora-orb-petrol { animation: auroraPulse 18s ease-in-out infinite 4s; }
+
+/* 2. Radar Sweep */
+@keyframes radarSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-scanner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 0;
+  background: conic-gradient(from 0deg at 0 0, rgba(140, 199, 196, 0.2) 0deg, transparent 60deg, transparent 360deg);
+  animation: radarSweep 4s linear infinite;
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+/* 3. Cyber Float */
+@keyframes cyberFloat {
+  0%, 100% { transform: translateY(0px) translateZ(0); }
+  50% { transform: translateY(-6px) translateZ(0); }
+}
+
+.animate-float {
+  animation: cyberFloat 5s ease-in-out infinite;
+}
+
+/* 4. Staggered Scroll Reveal (Hardware-Accelerated) */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px) translateZ(0);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+}
+
+.stagger-1 { transition-delay: 0.04s; }
+.stagger-2 { transition-delay: 0.08s; }
+.stagger-3 { transition-delay: 0.12s; }
+.stagger-4 { transition-delay: 0.16s; }
+.stagger-5 { transition-delay: 0.2s; }
+.stagger-6 { transition-delay: 0.24s; }
+
+/* 5. Modal Transitions */
+.modal-backdrop {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  transform: scale(0.96) translateY(12px) translateZ(0);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop.active .modal-content {
+  transform: scale(1) translateY(0) translateZ(0);
+}

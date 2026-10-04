@@ -1,0 +1,256 @@
+/* ==========================================================================
+   MousePilot by TAGX Labs™ — Grandmaster 2026 Editorial Design System
+   Parent Brand: TAGX Labs™ • Product: MousePilot
+   Standards: Awwwards Site of the Year / Apple Pro / Linear / Stripe Aesthetics
+   Palette:
+   - #8CC7C4 (Cyber Sage Teal - Primary Luminous Accent)
+   - #00FFEA (Electric Aqua Neon - Telemetry & High-Energy Glow)
+   - #FFF6F6 (Specular Off-White - Crisp Typography & Bevel Highlights)
+   - #DB1A1A (Electric Crimson - Tactical Action & Alert Tone)
+   - #2C687B (Deep Petrol Blue - Elevation & Structural Accents)
+   - #030706 / #071014 (Obsidian Void - Ultra-Deep High-Contrast Surfaces)
+   ========================================================================== */
+
+:root {
+  /* Brand Master Accents */
+  --mp-aqua: #8CC7C4;
+  --mp-aqua-glow: rgba(140, 199, 196, 0.4);
+  --mp-cyan: #00FFEA;
+  --mp-cyan-glow: rgba(0, 255, 234, 0.35);
+  --mp-crimson: #DB1A1A;
+  --mp-crimson-glow: rgba(219, 26, 26, 0.35);
+  --mp-cream: #FFF6F6;
+  --mp-petrol: #2C687B;
+  --mp-petrol-dark: #12242c;
+  
+  /* Obsidian Surfaces */
+  --bg-void: #030706;
+  --bg-deep: #060e12;
+  --bg-surface: #0a171d;
+  --bg-card: rgba(12, 25, 32, 0.85);
+  --bg-card-hover: rgba(18, 36, 45, 0.95);
+  
+  /* Borders & Specular Lines */
+  --border-subtle: rgba(140, 199, 196, 0.14);
+  --border-glow: rgba(140, 199, 196, 0.55);
+  --border-crimson: rgba(219, 26, 26, 0.4);
+  --border-specular: rgba(255, 246, 246, 0.18);
+  
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Google Material Symbols (Rounded) */
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.material-symbols-rounded.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Reset & Hardware Acceleration */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  font-family: var(--font-sans);
+  background-color: var(--bg-void);
+  color: var(--mp-cream);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-void);
+  color: var(--mp-cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
+/* Static Zero-Repaint Ambient Studio Backdrop */
+.bg-layer-fixed {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -5%, rgba(140, 199, 196, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 35%, rgba(219, 26, 26, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 15% 65%, rgba(44, 104, 123, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 40% at 50% 105%, rgba(140, 199, 196, 0.14) 0%, transparent 60%),
+    linear-gradient(180deg, #030706 0%, #060e12 30%, #09151c 65%, #030706 100%);
+  transform: translateZ(0);
+}
+
+/* Cyber Grid & Dot Matrix Layers */
+.cyber-grid-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    linear-gradient(to right, rgba(140, 199, 196, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(140, 199, 196, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 85%);
+  transform: translateZ(0);
+}
+
+.cyber-dot-matrix {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(rgba(255, 246, 246, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, #000 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, #000 25%, transparent 80%);
+  opacity: 0.5;
+  transform: translateZ(0);
+}
+
+/* Custom High-Precision Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--mp-petrol);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mp-aqua);
+}
+
+/* Typography Helpers */
+.font-sans { font-family: var(--font-sans); }
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Glassmorphism Cards with Specular Top Highlight */
+.glass-nav {
+  background: rgba(6, 14, 18, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(140, 199, 196, 0.25);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 246, 246, 0.15);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(12, 25, 32, 0.85) 0%, rgba(7, 16, 20, 0.95) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(140, 199, 196, 0.18);
+  box-shadow: 
+    0 14px 32px -10px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 0 rgba(255, 246, 246, 0.12);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+  transform: translateZ(0);
+}
+
+.glass-card:hover {
+  border-color: rgba(140, 199, 196, 0.6);
+  box-shadow: 
+    0 20px 44px -10px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(140, 199, 196, 0.2),
+    inset 0 1px 0 0 rgba(255, 246, 246, 0.25);
+  transform: translateY(-2px) translateZ(0);
+}
+
+/* 4-Color Brand Ribbon Header */
+.palette-ribbon {
+  height: 3px;
+  width: 100%;
+  display: flex;
+}
+.palette-ribbon div {
+  flex: 1;
+}
+
+/* High-Impact Gradient Buttons */
+.btn-primary-gradient {
+  background: linear-gradient(135deg, #8CC7C4 0%, #00FFEA 50%, #2C687B 100%);
+  color: #030706;
+  font-weight: 800;
+  border: 1px solid rgba(255, 246, 246, 0.6);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, filter 0.2s ease;
+  transform: translateZ(0);
+}
+
+.btn-primary-gradient:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 0 30px rgba(140, 199, 196, 0.7), 0 0 15px rgba(0, 255, 234, 0.4);
+  color: #000000;
+  transform: translateY(-1px) scale(1.02) translateZ(0);
+}
+
+.btn-primary-gradient:active {
+  transform: scale(0.97) translateZ(0);
+}
+
+.btn-secondary-glass {
+  background: rgba(14, 28, 35, 0.8);
+  border: 1px solid rgba(140, 199, 196, 0.3);
+  color: #FFF6F6;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary-glass:hover {
+  background: rgba(22, 45, 55, 0.95);
+  border-color: rgba(140, 199, 196, 0.6);
+  transform: translateY(-1px);
+}
+
+/* Solid High-Contrast Editorial Titles */
+.text-hero-title-main {
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.95);
+  letter-spacing: -0.035em;
+}
+
+.text-hero-title-gradient {
+  color: #8CC7C4 !important;
+  font-weight: 900 !important;
+  background: linear-gradient(90deg, #8CC7C4 0%, #00FFEA 45%, #DB1A1A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 30px rgba(140, 199, 196, 0.45));
+  letter-spacing: -0.035em;
+}

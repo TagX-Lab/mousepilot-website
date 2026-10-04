@@ -1,0 +1,3 @@
+# MousePilot v1.0.0 Release Hashes (SHA-256) - TAGX Labs
+b97a07fe9004999addf53edef3515fdc8b27c5533dc9578982b1f7c2b410daec  MousePilot-Setup-v1.0.0.exe  (35.23 MB)
+7f9e14124f94ba4bc997f5c4dc1984cbd160d60fa414701879cf5c6b6ef68f4a  MousePilot-v1.0.0-Portable.zip  (37.82 MB)

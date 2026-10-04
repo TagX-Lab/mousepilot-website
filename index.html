@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>MousePilot — Put your cursor on autopilot. | TAGX Labs™</title>
+  <meta name="description" content="MousePilot by TAGX Labs™ is an enterprise-grade autonomous cursor keep-alive & anti-sleep utility for Windows. 100% zero synthetic clicks, intelligent human takeover yield, and 4 mathematical motion patterns.">
+  <meta name="theme-color" content="#030706">
+
+  <!-- OpenGraph / Social Cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MousePilot — Put your cursor on autopilot.">
+  <meta property="og:description" content="Autonomous keep-alive & anti-sleep utility for Windows. Maintain 100% workplace presence and active status with zero clicks.">
+  <meta property="og:image" content="assets/logo.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icon.png">
+
+  <!-- Tailwind CSS & Google Fonts (Plus Jakarta Sans, Space Grotesk, JetBrains Mono & Google Material Symbols) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <!-- Core Design System & Animations -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            void: '#030706',
+            surface: '#0a171d',
+            card: '#0e2028',
+            brand: {
+              aqua: '#8CC7C4',
+              cyan: '#00FFEA',
+              crimson: '#DB1A1A',
+              cream: '#FFF6F6',
+              petrol: '#2C687B',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-void text-brand-cream font-sans antialiased selection:bg-brand-aqua selection:text-void relative overflow-x-hidden">
+
+  <!-- Hardware-Accelerated Static Background Layer -->
+  <div class="bg-layer-fixed"></div>
+
+  <!-- Ambient Scene Background Layers -->
+  <div class="cyber-grid-layer"></div>
+  <div class="cyber-dot-matrix"></div>
+
+  <!-- 4-Color Brand Top Ribbon -->
+  <div class="palette-ribbon fixed top-0 left-0 right-0 z-[60]">
+    <div class="bg-brand-crimson"></div>
+    <div class="bg-brand-cream"></div>
+    <div class="bg-brand-aqua"></div>
+    <div class="bg-brand-petrol"></div>
+  </div>
+
+  <!-- Floating Island Glass Navbar -->
+  <header class="floating-navbar">
+    <div class="px-5 sm:px-6 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo & Badge -->
+      <a href="#" class="flex items-center gap-3 group">
+        <img src="assets/logo.png" alt="MousePilot Tactical Logo" class="w-10 h-10 rounded-xl object-contain border border-brand-aqua/40 shadow-lg shadow-brand-aqua/20 p-0.5 bg-surface/90 transition-transform group-hover:scale-105">
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold tracking-tight text-lg text-white leading-none">MOUSEPILOT</span>
+          <span class="text-[9px] font-mono font-bold text-brand-aqua uppercase tracking-widest mt-0.5">TAGX Labs™</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links (ScrollSpy enabled) -->
+      <nav class="hidden md:flex items-center gap-5 text-xs font-semibold text-slate-300">
+        <a href="#use-cases" class="nav-link hover:text-brand-aqua transition-colors">Who It's For</a>
+        <a href="#simulator" class="nav-link hover:text-brand-aqua transition-colors">Kinematics Simulator</a>
+        <a href="#features" class="nav-link hover:text-brand-aqua transition-colors">Features & Safety</a>
+        <a href="#releases" class="nav-link hover:text-brand-aqua transition-colors">Version Archive</a>
+        <a href="#about" class="nav-link hover:text-brand-aqua transition-colors">About TAGX Labs</a>
+        <a href="#faq" class="nav-link hover:text-brand-aqua transition-colors">FAQ</a>
+      </nav>
+
+      <!-- Action Buttons & Mobile Hamburger -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="#download" class="btn-primary-gradient px-4 sm:px-5 py-2.5 text-xs font-extrabold rounded-xl shadow-lg transition-all flex items-center gap-2 group">
+          <span class="material-symbols-rounded text-base group-hover:translate-y-0.5 transition-transform">download</span>
+          <span class="hidden sm:inline">Download Free</span>
+          <span class="sm:hidden">Get App</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileNavToggle" aria-label="Open Mobile Menu" class="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-slate-200 hover:text-brand-aqua transition-all flex items-center justify-center">
+          <span class="material-symbols-rounded text-xl">menu</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop">
+    <div class="mobile-nav-drawer">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
+        <div class="flex items-center gap-2">
+          <img src="assets/logo.png" alt="MousePilot" class="w-7 h-7 rounded-lg object-contain">
+          <span class="font-display font-bold text-white text-sm">MOUSEPILOT</span>
+        </div>
+        <button id="mobileNavClose" aria-label="Close Mobile Menu" class="text-slate-400 hover:text-white p-1 flex items-center justify-center">
+          <span class="material-symbols-rounded text-xl">close</span>
+        </button>
+      </div>
+
+      <nav class="flex flex-col gap-3 text-sm font-semibold text-slate-300">
+        <a href="#use-cases" class="p-2 rounded-lg hover:bg-white/5 hover:text-brand-aqua transition-colors flex items-center gap-2.5">
+          <span class="material-symbols-rounded text-brand-aqua text-lg">group</span>
+          <span>Who It's For</span>
+        </a>
+        <a href="#simulator" class="p-2 rounded-lg hover:bg-white/5 hover:text-brand-aqua transition-colors flex items-center gap-2.5">
+          <span class="material-symbols-rounded text-brand-aqua text-lg">radar</span>
+          <span>Kinematics Simulator</span>
+        </a>
+        <a href="#features" class="p-2 rounded-lg hover:bg-white/5 hover:text-brand-aqua transition-colors flex items-center gap-2.5">
+          <span class="material-symbols-rounded text-brand-aqua text-lg">security</span>
+          <span>Features & Safety</span>
+        </a>
+        <a href="#releases" class="p-2 rounded-lg hover:bg-white/5 hover:text-brand-aqua transition-colors flex items-center gap-2.5">
+          <span class="material-symbols-rounded text-brand-aqua text-lg">inventory_2</span>
+          <span>Version Archive</span>
+        </a>
+        <a href="#about" class="p-2 rounded-lg hover:bg-white/5 hover:text-brand-aqua transition-colors flex items-center gap-2.5">
+          <span class="material-symbols-rounded text-brand-aqua text-lg">domain</span>
+          <span>About TAGX Labs</span>
+        </a>
+        <a href="#faq" class="p-2 rounded-lg hover:bg-white/5 hover:text-brand-aqua transition-colors flex items-center gap-2.5">
+          <span class="material-symbols-rounded text-brand-aqua text-lg">help</span>
+          <span>FAQ</span>
+        </a>
+      </nav>
+
+      <div class="mt-6 pt-4 border-t border-slate-800 flex flex-col gap-2">
+        <a href="downloads/MousePilot-Setup-v1.0.0.exe" download class="btn-primary-gradient w-full py-3 rounded-xl text-center text-xs font-extrabold flex items-center justify-center gap-2">
+          <span class="material-symbols-rounded text-base">download</span>
+          <span>Download Setup (.exe)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grandmaster Hero Section (Fitted to 100vh screen) -->
+  <section id="hero" class="relative min-h-[calc(100vh-1rem)] lg:h-[calc(100vh-1rem)] flex items-center pt-24 pb-6 px-6 overflow-hidden">
+    
+    <!-- 3D Floating Gravity Particles Canvas (Interactive Cursor Anti-Gravity Repulsion) -->
+    <canvas id="heroGravityCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
+      
+      <!-- Left Column: Value Prop & Actions -->
+      <div id="hero-content" class="lg:col-span-7 flex flex-col text-left">
+        
+        <!-- Main Headline -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-[1.08] mb-6">
+          <span class="text-hero-title-main block">Never Show Away.</span>
+          <span class="text-hero-title-gradient block mt-1">Zero Synthetic Clicks.</span>
+        </h1>
+
+        <!-- Grandmaster Download & Action Deck -->
+        <div class="space-y-4 max-w-xl">
+          
+          <!-- Primary & Secondary CTA Buttons Row -->
+          <div class="flex flex-col sm:flex-row items-stretch gap-3">
+            <!-- Setup Installer Button -->
+            <a href="downloads/MousePilot-Setup-v1.0.0.exe" download class="btn-primary-gradient flex-1 py-3.5 px-6 rounded-2xl flex items-center justify-between group shadow-xl shadow-brand-aqua/20 border border-white/20">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-void/30 flex items-center justify-center">
+                  <span class="material-symbols-rounded text-lg text-void transition-transform group-hover:translate-y-0.5">download</span>
+                </div>
+                <div class="text-left">
+                  <div class="font-extrabold text-sm leading-tight text-void">Download Setup</div>
+                  <div class="text-[10px] font-mono font-bold text-void/80">Windows 11 & 10 • .exe</div>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono font-extrabold px-2 py-0.5 rounded-md bg-void/20 text-void">35 MB</span>
+            </a>
+
+            <!-- Portable Zip Button -->
+            <a href="downloads/MousePilot-v1.0.0-Portable.zip" download class="btn-secondary-glass py-3.5 px-5 rounded-2xl flex items-center justify-center gap-2 text-xs font-bold transition-all group">
+              <span class="material-symbols-rounded text-base text-brand-aqua transition-transform group-hover:scale-110">folder_zip</span>
+              <span>Portable (.zip)</span>
+            </a>
+          </div>
+
+          <!-- 4 High-Precision Tactical Feature Tiles with Crisp Google Material Symbols -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+            <div class="p-3 rounded-2xl glass-card border border-brand-aqua/20 flex flex-col text-left">
+              <span class="material-symbols-rounded text-lg text-brand-aqua mb-1.5">security</span>
+              <div class="font-bold text-white text-xs">Zero-Click</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Zero Misclicks</div>
+            </div>
+
+            <div class="p-3 rounded-2xl glass-card border border-brand-aqua/20 flex flex-col text-left">
+              <span class="material-symbols-rounded text-lg text-brand-aqua mb-1.5">bolt</span>
+              <div class="font-bold text-white text-xs">0.00% CPU</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">&lt; 14 MB RAM</div>
+            </div>
+
+            <div class="p-3 rounded-2xl glass-card border border-brand-aqua/20 flex flex-col text-left">
+              <span class="material-symbols-rounded text-lg text-brand-aqua mb-1.5">fingerprint</span>
+              <div class="font-bold text-white text-xs">Auto-Yield</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Instant Takeover</div>
+            </div>
+
+            <div class="p-3 rounded-2xl glass-card border border-brand-aqua/20 flex flex-col text-left">
+              <span class="material-symbols-rounded text-lg text-brand-aqua mb-1.5">lock</span>
+              <div class="font-bold text-white text-xs">100% Offline</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Zero Telemetry</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Right Column: Official Product Logo Showcase Card -->
+      <div class="lg:col-span-5 relative flex justify-center items-center">
+        <div class="glass-card p-3 sm:p-4 rounded-3xl border border-brand-aqua/40 relative flex items-center justify-center w-full max-w-md shadow-2xl overflow-hidden group">
+          
+          <!-- Ambient Radial Neon Aura behind Logo -->
+          <div class="absolute inset-0 bg-radial-glow pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity"></div>
+
+          <!-- Crisp Product Logo Fitted Inside Border -->
+          <div class="relative w-full aspect-square flex items-center justify-center z-10 p-2 sm:p-3">
+            <div class="absolute w-56 h-56 rounded-full bg-brand-aqua/20 filter blur-3xl animate-pulse"></div>
+            <img src="assets/logo.png" alt="MousePilot Official Tactical Cyber Wing Logo" class="w-full h-full object-contain rounded-2xl drop-shadow-[0_15px_40px_rgba(140,199,196,0.35)] transition-transform duration-500 group-hover:scale-105">
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Who Is This For? Problem vs. Solution Bento Grid -->
+  <section id="use-cases" class="py-24 px-6 border-t border-slate-800/80 bg-surface/20 relative">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-16 reveal-on-scroll">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-petrol/40 border border-brand-aqua/30 text-brand-aqua text-[11px] font-mono font-bold tracking-widest uppercase mb-3">
+          <span class="material-symbols-rounded text-sm text-brand-aqua">track_changes</span>
+          <span>TARGET AUDIENCE & PROBLEM SOLVING</span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
+          Who Is MousePilot Built For?
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 mt-3 max-w-2xl mx-auto leading-relaxed">
+          Unfair corporate timeout policies and sudden "Idle" flags interrupt flow state. Here is how MousePilot eliminates the friction for high-focus professionals.
+        </p>
+      </div>
+
+      <!-- 3 Master Comparison Bento Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        
+        <!-- Persona 1: Software Engineers & Systems Developers -->
+        <div class="glass-card p-6 sm:p-7 rounded-3xl border border-brand-aqua/20 flex flex-col justify-between hover:border-brand-aqua/50 transition-all duration-300 reveal-on-scroll relative group">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-brand-aqua/5 rounded-full filter blur-2xl pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <span class="text-[10px] font-mono font-bold text-brand-aqua tracking-wider px-2.5 py-1 rounded-md bg-brand-petrol/50 border border-brand-aqua/30">01 / ENGINEERING</span>
+              <div class="p-2.5 rounded-xl bg-void border border-brand-aqua/30 text-brand-aqua flex items-center justify-center shadow-md shadow-brand-aqua/5">
+                <span class="material-symbols-rounded text-xl">terminal</span>
+              </div>
+            </div>
+            
+            <h3 class="text-xl font-display font-bold text-white mb-2 group-hover:text-brand-aqua transition-colors">
+              Developers & Engineers
+            </h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+              Running long builds, migrations, ML pipelines, and active remote terminal SSH sessions.
+            </p>
+
+            <!-- Problem Box -->
+            <div class="p-4 rounded-2xl bg-brand-crimson/10 border border-brand-crimson/30 mb-4">
+              <div class="flex items-center gap-2 text-xs font-mono font-bold text-red-400 mb-1.5">
+                <span class="material-symbols-rounded text-base shrink-0 text-brand-crimson">cancel</span>
+                <span>THE PROBLEM</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                A 10-minute compile triggers screen lock, dropping active SSH tunnels, pausing background workflows, or falsely showing "Away" during deep debugging.
+              </p>
+            </div>
+
+            <!-- Solution Box -->
+            <div class="p-4 rounded-2xl bg-brand-aqua/10 border border-brand-aqua/30">
+              <div class="flex items-center gap-2 text-xs font-mono font-bold text-brand-aqua mb-1.5">
+                <span class="material-symbols-rounded text-base shrink-0 text-brand-aqua">check_circle</span>
+                <span>OUR SOLUTION</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Zero synthetic mouse clicks ensure no accidental terminal keystrokes or cursor interruptions occur. Sessions stay alive smoothly and silently.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature Tag Footer -->
+          <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <span class="flex items-center gap-1.5 text-slate-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-aqua"></span>
+              Zero-Click Safe
+            </span>
+            <span class="text-slate-500">No Admin Needed</span>
+          </div>
+        </div>
+
+        <!-- Persona 2: Data Analysts, Researchers & Document Reviewers -->
+        <div class="glass-card p-6 sm:p-7 rounded-3xl border border-brand-aqua/30 flex flex-col justify-between hover:border-brand-aqua/60 transition-all duration-300 reveal-on-scroll relative group bg-surface/50">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-brand-cyan/5 rounded-full filter blur-2xl pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <span class="text-[10px] font-mono font-bold text-brand-aqua tracking-wider px-2.5 py-1 rounded-md bg-brand-petrol/50 border border-brand-aqua/30">02 / RESEARCH & DATA</span>
+              <div class="p-2.5 rounded-xl bg-void border border-brand-aqua/30 text-brand-aqua flex items-center justify-center shadow-md shadow-brand-aqua/5">
+                <span class="material-symbols-rounded text-xl">analytics</span>
+              </div>
+            </div>
+            
+            <h3 class="text-xl font-display font-bold text-white mb-2 group-hover:text-brand-aqua transition-colors">
+              Analysts & Reviewers
+            </h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+              Reading multi-page analytical reports, financial spreadsheets, BI dashboards, or regulatory contracts.
+            </p>
+
+            <!-- Problem Box -->
+            <div class="p-4 rounded-2xl bg-brand-crimson/10 border border-brand-crimson/30 mb-4">
+              <div class="flex items-center gap-2 text-xs font-mono font-bold text-red-400 mb-1.5">
+                <span class="material-symbols-rounded text-base shrink-0 text-brand-crimson">cancel</span>
+                <span>THE PROBLEM</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Reading without moving the physical mouse causes monitors to dim and lock every 2 minutes, forcing repetitive password logins during deep scrutiny.
+              </p>
+            </div>
+
+            <!-- Solution Box -->
+            <div class="p-4 rounded-2xl bg-brand-aqua/10 border border-brand-aqua/30">
+              <div class="flex items-center gap-2 text-xs font-mono font-bold text-brand-aqua mb-1.5">
+                <span class="material-symbols-rounded text-base shrink-0 text-brand-aqua">check_circle</span>
+                <span>OUR SOLUTION</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Gentle Orbit and Horizon Sweep algorithms smoothly stimulate screen timers without pulling cursor focus away from your active reading window.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature Tag Footer -->
+          <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <span class="flex items-center gap-1.5 text-slate-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan"></span>
+              Sinusoidal Motion
+            </span>
+            <span class="text-slate-500">100% Offline</span>
+          </div>
+        </div>
+
+        <!-- Persona 3: Remote & Hybrid Knowledge Workers -->
+        <div class="glass-card p-6 sm:p-7 rounded-3xl border border-brand-aqua/20 flex flex-col justify-between hover:border-brand-aqua/50 transition-all duration-300 reveal-on-scroll relative group">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-brand-petrol/20 rounded-full filter blur-2xl pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <span class="text-[10px] font-mono font-bold text-brand-aqua tracking-wider px-2.5 py-1 rounded-md bg-brand-petrol/50 border border-brand-aqua/30">03 / REMOTE WORK</span>
+              <div class="p-2.5 rounded-xl bg-void border border-brand-aqua/30 text-brand-aqua flex items-center justify-center shadow-md shadow-brand-aqua/5">
+                <span class="material-symbols-rounded text-xl">public</span>
+              </div>
+            </div>
+            
+            <h3 class="text-xl font-display font-bold text-white mb-2 group-hover:text-brand-aqua transition-colors">
+              Hybrid & Remote Teams
+            </h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+              Collaborating across digital workspaces while taking calls, planning on physical paper, or sketching.
+            </p>
+
+            <!-- Problem Box -->
+            <div class="p-4 rounded-2xl bg-brand-crimson/10 border border-brand-crimson/30 mb-4">
+              <div class="flex items-center gap-2 text-xs font-mono font-bold text-red-400 mb-1.5">
+                <span class="material-symbols-rounded text-base shrink-0 text-brand-crimson">cancel</span>
+                <span>THE PROBLEM</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Stepping aside to think, take notes, or review hard copies marks workplace status as "Away / Inactive", creating unwarranted micromanagement friction.
+              </p>
+            </div>
+
+            <!-- Solution Box -->
+            <div class="p-4 rounded-2xl bg-brand-aqua/10 border border-brand-aqua/30">
+              <div class="flex items-center gap-2 text-xs font-mono font-bold text-brand-aqua mb-1.5">
+                <span class="material-symbols-rounded text-base shrink-0 text-brand-aqua">check_circle</span>
+                <span>OUR SOLUTION</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Maintains continuous presence seamlessly. The millisecond your physical mouse moves, MousePilot yields instant control with zero latency.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature Tag Footer -->
+          <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <span class="flex items-center gap-1.5 text-slate-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-aqua"></span>
+              Instant Auto-Yield
+            </span>
+            <span class="text-slate-500">&lt; 14 MB RAM</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Architectural Comparison Bar (Traditional Jiggler vs MousePilot) -->
+      <div class="glass-card p-6 sm:p-8 rounded-3xl border border-brand-aqua/30 bg-surface/40 reveal-on-scroll">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-4">
+            <div class="text-xs font-mono font-bold text-brand-aqua uppercase tracking-wider mb-1">ARCHITECTURAL CONTRAST</div>
+            <h4 class="text-xl sm:text-2xl font-display font-extrabold text-white">Why MousePilot is Superior</h4>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Unlike crude background scripts or hardware dongles that simulate noisy clicks, MousePilot is a pure Win32 software kinematic engine.</p>
+          </div>
+          
+          <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
+            <div class="p-4 rounded-2xl bg-void/70 border border-brand-crimson/30">
+              <div class="text-red-400 font-bold mb-2 flex items-center gap-2">
+                <span class="material-symbols-rounded text-base text-brand-crimson">cancel</span>
+                <span>Traditional Tools & Scripts</span>
+              </div>
+              <ul class="space-y-1.5 text-slate-400 text-[11px]">
+                <li class="flex items-start gap-2"><span>•</span> Simulates synthetic clicks (risky in open editors)</li>
+                <li class="flex items-start gap-2"><span>•</span> Jerky erratic movements that fight user input</li>
+                <li class="flex items-start gap-2"><span>•</span> Often requires administrator elevation or USB dongles</li>
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-void/70 border border-brand-aqua/40 shadow-lg shadow-brand-aqua/5">
+              <div class="text-brand-aqua font-bold mb-2 flex items-center gap-2">
+                <span class="material-symbols-rounded text-base text-brand-aqua">check_circle</span>
+                <span>TAGX MousePilot™ Engine</span>
+              </div>
+              <ul class="space-y-1.5 text-slate-200 text-[11px]">
+                <li class="flex items-start gap-2"><span>•</span> 100% Zero-Click policy (pure coordinate shift)</li>
+                <li class="flex items-start gap-2"><span>•</span> Instant auto-yield on physical user interaction</li>
+                <li class="flex items-start gap-2"><span>•</span> Zero admin rights, 100% offline, &lt; 14 MB RAM</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Kinematics Simulator Playground -->
+  <section id="simulator" class="py-24 px-6 border-t border-slate-800/80 bg-surface/30 relative">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center mb-16 reveal-on-scroll">
+        <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-brand-aqua mb-2">LIVE KINEMATICS PLAYGROUND</h2>
+        <h3 class="text-3xl sm:text-5xl font-display font-extrabold text-white">Experience Autopilot Motion in Real Time</h3>
+        <p class="text-sm text-slate-400 mt-2 max-w-lg mx-auto">Select a pattern below to test how MousePilot dynamically computes coordinate trajectories at 40 FPS without simulating mouse clicks.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Interactive Canvas Radar -->
+        <div class="lg:col-span-7 glass-card p-6 sm:p-8 rounded-3xl relative overflow-hidden border border-brand-petrol reveal-on-scroll">
+          <div class="flex items-center justify-between mb-4 text-xs font-mono text-slate-400">
+            <span class="flex items-center gap-2 font-bold text-white">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-aqua animate-ping"></span>
+              RADAR COORDINATE TELEMETRY
+            </span>
+            <span class="text-brand-aqua font-bold px-2 py-0.5 rounded bg-brand-petrol/50 border border-brand-aqua/30 flex items-center gap-1"><span class="material-symbols-rounded text-xs">bolt</span><span>40 FPS KINEMATICS</span></span>
+          </div>
+
+          <div class="relative w-full h-80 rounded-2xl overflow-hidden radar-screen">
+            <canvas id="kinematicsCanvas" class="w-full h-full"></canvas>
+            <div class="radar-scanner"></div>
+          </div>
+
+          <!-- Real-Time Telemetry Meters -->
+          <div class="grid grid-cols-3 gap-3 mt-4 text-center font-mono text-xs">
+            <div class="p-3 rounded-xl bg-void border border-slate-800">
+              <div class="text-slate-400 text-[10px] font-bold uppercase">DELTA X</div>
+              <div id="telemetryX" class="text-brand-aqua font-bold text-sm mt-0.5">0</div>
+            </div>
+            <div class="p-3 rounded-xl bg-void border border-slate-800">
+              <div class="text-slate-400 text-[10px] font-bold uppercase">DELTA Y</div>
+              <div id="telemetryY" class="text-brand-aqua font-bold text-sm mt-0.5">0</div>
+            </div>
+            <div class="p-3 rounded-xl bg-void border border-slate-800">
+              <div class="text-slate-400 text-[10px] font-bold uppercase">RADIUS</div>
+              <div id="telemetryRadius" class="text-white font-bold text-sm mt-0.5">60px</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern Controls & Mode Switcher -->
+        <div class="lg:col-span-5 space-y-3 reveal-on-scroll">
+          <div class="mb-4">
+            <h4 id="simCurrentModeTitle" class="text-xl font-display font-bold text-white flex items-center gap-2">
+              <span>Gentle Orbit Mode</span>
+            </h4>
+            <p id="simCurrentModeDesc" class="text-xs text-slate-400 mt-1 leading-relaxed">Smooth 40 FPS circular trajectory with sinusoidal coordinate translation.</p>
+          </div>
+
+          <!-- Mode 1 -->
+          <button class="mode-btn active w-full p-4 rounded-2xl text-left flex items-center justify-between" data-mode="orbit">
+            <div class="flex items-start gap-3">
+              <div class="p-2 rounded-xl bg-void border border-brand-aqua/30 text-brand-aqua mt-0.5">
+                <span class="material-symbols-rounded text-lg">sync</span>
+              </div>
+              <div>
+                <div class="font-bold text-sm text-white">Gentle Orbit</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Smooth circular motion ideal for keeping status active without distraction.</div>
+              </div>
+            </div>
+            <span class="text-xs font-mono font-bold text-brand-aqua ml-3">01</span>
+          </button>
+
+          <!-- Mode 2 -->
+          <button class="mode-btn w-full p-4 rounded-2xl text-left flex items-center justify-between" data-mode="stealth">
+            <div class="flex items-start gap-3">
+              <div class="p-2 rounded-xl bg-void border border-slate-700 text-slate-400 mt-0.5">
+                <span class="material-symbols-rounded text-lg">visibility_off</span>
+              </div>
+              <div>
+                <div class="font-bold text-sm text-white">Stealth 1-Pixel</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Microscopic 1-pixel jiggle imperceptible to screen recordings or meeting viewers.</div>
+              </div>
+            </div>
+            <span class="text-xs font-mono font-bold text-slate-500 ml-3">02</span>
+          </button>
+
+          <!-- Mode 3 -->
+          <button class="mode-btn w-full p-4 rounded-2xl text-left flex items-center justify-between" data-mode="figure8">
+            <div class="flex items-start gap-3">
+              <div class="p-2 rounded-xl bg-void border border-slate-700 text-slate-400 mt-0.5">
+                <span class="material-symbols-rounded text-lg">all_inclusive</span>
+              </div>
+              <div>
+                <div class="font-bold text-sm text-white">Figure-8 (Lissajous)</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Harmonic infinity curve simulating natural ergonomic human wrist sweeps.</div>
+              </div>
+            </div>
+            <span class="text-xs font-mono font-bold text-slate-500 ml-3">03</span>
+          </button>
+
+          <!-- Mode 4 -->
+          <button class="mode-btn w-full p-4 rounded-2xl text-left flex items-center justify-between" data-mode="wander">
+            <div class="flex items-start gap-3">
+              <div class="p-2 rounded-xl bg-void border border-slate-700 text-slate-400 mt-0.5">
+                <span class="material-symbols-rounded text-lg">shuffle</span>
+              </div>
+              <div>
+                <div class="font-bold text-sm text-white">Random Wander</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Brownian drift physics with mathematical anchor bounding failsafes.</div>
+              </div>
+            </div>
+            <span class="text-xs font-mono font-bold text-slate-500 ml-3">04</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Features & Safety Architecture Bento Grid -->
+  <section id="features" class="py-24 px-6 relative">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center mb-16 reveal-on-scroll">
+        <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-brand-aqua mb-2">ENTERPRISE SAFETY ARCHITECTURE</h2>
+        <h3 class="text-3xl sm:text-5xl font-display font-extrabold text-white">Engineered with Zero Compromises</h3>
+        <p class="text-sm text-slate-400 mt-2 max-w-lg mx-auto">Designed for remote professionals who need reliable presence without risking workflow safety.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Bento 1 -->
+        <div class="glass-card p-8 rounded-3xl bento-card-highlight flex flex-col reveal-on-scroll">
+          <div class="w-12 h-12 rounded-2xl bg-brand-aqua/10 border border-brand-aqua/30 flex items-center justify-center text-brand-aqua mb-6 shadow-md shadow-brand-aqua/10">
+            <span class="material-symbols-rounded text-2xl">security</span>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2 font-display">100% Zero-Click Guarantee</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Uses native OS <code class="text-brand-aqua font-mono text-xs">SetCursorPos</code> coordinate translation only. Never simulates left or right clicks, guaranteeing zero risk of closing tabs or accidental misclicks.
+          </p>
+        </div>
+
+        <!-- Bento 2 -->
+        <div class="glass-card p-8 rounded-3xl bento-card-highlight flex flex-col reveal-on-scroll">
+          <div class="w-12 h-12 rounded-2xl bg-brand-petrol/40 border border-brand-petrol flex items-center justify-center text-brand-aqua mb-6 shadow-md shadow-brand-petrol/20">
+            <span class="material-symbols-rounded text-2xl">fingerprint</span>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2 font-display">Human Takeover Detection</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Intelligent velocity tracking detects when you touch your mouse, immediately yielding control and entering a smooth 3-second auto-pause cooldown.
+          </p>
+        </div>
+
+        <!-- Bento 3 -->
+        <div class="glass-card p-8 rounded-3xl bento-card-highlight flex flex-col reveal-on-scroll">
+          <div class="w-12 h-12 rounded-2xl bg-brand-crimson/10 border border-brand-crimson/40 flex items-center justify-center text-brand-crimson mb-6 shadow-md shadow-brand-crimson/10">
+            <span class="material-symbols-rounded text-2xl">bolt</span>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2 font-display">Kernel Keep-Alive Lock</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Direct Win32 <code class="text-brand-crimson font-mono text-xs">SetThreadExecutionState</code> resets display and sleep timers, keeping your remote workspaces, collaboration apps, and green status indicators active 100% of the time.
+          </p>
+        </div>
+
+        <!-- Bento 4 -->
+        <div class="glass-card p-8 rounded-3xl bento-card-highlight flex flex-col reveal-on-scroll">
+          <div class="w-12 h-12 rounded-2xl bg-brand-petrol/40 border border-brand-petrol flex items-center justify-center text-brand-aqua mb-6">
+            <span class="material-symbols-rounded text-2xl">timer</span>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2 font-display">Delay & Session Timers</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Set countdown start delays (1m, 5m) or automatic stop timers (30m, 1h, 2h, Infinite) for complete scheduling flexibility.
+          </p>
+        </div>
+
+        <!-- Bento 5 -->
+        <div class="glass-card p-8 rounded-3xl bento-card-highlight flex flex-col reveal-on-scroll">
+          <div class="w-12 h-12 rounded-2xl bg-brand-aqua/10 border border-brand-aqua/30 flex items-center justify-center text-brand-aqua mb-6">
+            <span class="material-symbols-rounded text-2xl">lock</span>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2 font-display">Zero Telemetry & 100% Offline</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            MousePilot is completely local software. Zero network requests, zero background data collection, and zero tracking. Your privacy is inviolable.
+          </p>
+        </div>
+
+        <!-- Bento 6 -->
+        <div class="glass-card p-8 rounded-3xl bento-card-highlight flex flex-col reveal-on-scroll">
+          <div class="w-12 h-12 rounded-2xl bg-brand-crimson/10 border border-brand-crimson/40 flex items-center justify-center text-brand-crimson mb-6">
+            <span class="material-symbols-rounded text-2xl">desktop_windows</span>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2 font-display">System Tray & Global Hotkeys</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Docks silently to the Windows notification tray with instant global hotkeys (<code class="text-brand-aqua font-mono text-xs">Ctrl+Alt+G</code> and <code class="text-brand-aqua font-mono text-xs">Ctrl+Alt+H</code>).
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Version History & Download Matrix -->
+  <section id="releases" class="py-24 px-6 border-t border-slate-800/80 bg-surface/30 relative">
+    <div class="max-w-4xl mx-auto">
+      
+      <div class="text-center mb-16 reveal-on-scroll">
+        <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-brand-aqua mb-2">DOWNLOAD & VERSION ARCHIVE</h2>
+        <h3 class="text-3xl sm:text-5xl font-display font-extrabold text-white">Release Matrix & Changelog</h3>
+        <p class="text-sm text-slate-400 mt-2">All releases are cryptographically hashed and verified for safety.</p>
+      </div>
+
+      <!-- Version Card 1.0.0 -->
+      <div class="glass-card p-8 rounded-3xl border border-brand-aqua/40 mb-6 reveal-on-scroll">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-display font-bold text-white">MousePilot v1.0.0</span>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-brand-aqua/20 text-brand-aqua border border-brand-aqua/40">LATEST STABLE</span>
+            </div>
+            <div class="text-xs text-slate-400 font-mono mt-1">Released: October 2026 • Windows 10 & 11 (64-bit)</div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <a href="downloads/MousePilot-Setup-v1.0.0.exe" download class="btn-primary-gradient px-5 py-2.5 text-xs font-extrabold rounded-xl shadow-lg transition-all">
+              Setup Installer (.exe)
+            </a>
+            <a href="downloads/MousePilot-v1.0.0-Portable.zip" download class="btn-secondary-glass px-5 py-2.5 text-xs font-bold rounded-xl text-slate-300 transition-all">
+              Portable (.zip)
+            </a>
+          </div>
+        </div>
+
+        <div class="pt-6">
+          <h5 class="text-xs font-mono font-bold uppercase tracking-wider text-brand-aqua mb-3">Key Highlights in v1.0.0:</h5>
+          <ul class="space-y-2 text-xs text-slate-300 font-mono">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-sm text-brand-aqua">check_circle</span>
+              <span>Official product launch under <strong>TAGX Labs™</strong> parent brand hierarchy.</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-sm text-brand-aqua">check_circle</span>
+              <span>4 Mathematical Kinematic Trajectory Modes (Orbit, Stealth 1-px, Figure-8, Wander).</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-sm text-brand-aqua">check_circle</span>
+              <span>Real-time velocity human takeover yield with 3s auto-pause cooldown.</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-sm text-brand-aqua">check_circle</span>
+              <span>First-run license & safety onboarding modal.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Future Release Roadmap Teaser -->
+      <div class="p-6 rounded-2xl glass-card text-center text-xs font-mono text-slate-400 reveal-on-scroll flex items-center justify-center gap-2">
+        <span class="material-symbols-rounded text-base text-brand-aqua shrink-0">rocket_launch</span>
+        <span><strong class="text-brand-aqua">MousePilot v1.1.0 Roadmap:</strong> Multi-monitor bounding selector, custom trajectory scripting, and macOS Apple Silicon build.</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Non-Intrusive Sponsored Tool Slot -->
+  <section class="py-12 px-6">
+    <div class="max-w-4xl mx-auto reveal-on-scroll">
+      <div class="glass-card p-6 rounded-3xl border border-slate-800 text-center relative overflow-hidden">
+        <span class="text-[10px] font-mono uppercase tracking-widest text-slate-500 font-bold">SPONSORED TECH RECOMMENDATION</span>
+        <div class="py-6 my-2 rounded-2xl bg-surface/80 border border-slate-800 flex flex-col sm:flex-row items-center justify-between px-8 gap-4">
+          <div class="text-left">
+            <h4 class="font-display font-bold text-white text-base">Supercharge Your Remote Engineering Setup</h4>
+            <p class="text-xs text-slate-400 mt-1">Discover curated developer tools and hardware accessories built for high-performance engineers.</p>
+          </div>
+          <a href="https://github.com" target="_blank" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs border border-white/10 transition-all whitespace-nowrap flex items-center gap-1.5">
+            <span>Explore Sponsors</span>
+            <span class="material-symbols-rounded text-sm">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About TAGX Labs™ Brand Story / Manifesto -->
+  <section id="about" class="py-24 px-6 relative">
+    <div class="max-w-4xl mx-auto glass-card p-8 sm:p-12 rounded-3xl border border-brand-aqua/30 reveal-on-scroll">
+      <div class="flex items-center gap-3 mb-6">
+        <img src="assets/logo.png" alt="TAGX Labs" class="w-12 h-12 rounded-2xl object-contain border border-brand-aqua/40 bg-surface/90 p-0.5">
+        <div>
+          <h3 class="text-2xl font-display font-extrabold text-white">Built by TAGX Labs™</h3>
+          <p class="text-xs font-mono text-brand-aqua font-bold">Independent Software Engineering Syndicate</p>
+        </div>
+      </div>
+
+      <p class="text-sm text-slate-300 leading-relaxed mb-4">
+        At <strong>TAGX Labs™</strong>, we craft high-performance, distraction-free desktop software with obsessive attention to ergonomics, memory efficiency, and privacy. 
+      </p>
+      <p class="text-sm text-slate-300 leading-relaxed">
+        <strong>MousePilot</strong> was engineered with a strict principle: <em>Zero Bloat. Zero Surveillance. Maximum Autonomy.</em> We believe software should run silently, respect your hardware, and get out of your way.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-24 px-6 border-t border-slate-800/80 bg-surface/30 relative">
+    <div class="max-w-3xl mx-auto">
+      
+      <div class="text-center mb-16 reveal-on-scroll">
+        <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-brand-aqua mb-2">FREQUENTLY ASKED QUESTIONS</h2>
+        <h3 class="text-3xl sm:text-4xl font-display font-extrabold text-white">Everything You Need to Know</h3>
+      </div>
+
+      <div class="space-y-4">
+        
+        <!-- FAQ 1 -->
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden reveal-on-scroll">
+          <button class="faq-trigger w-full p-5 text-left font-bold text-sm text-white flex items-center justify-between" aria-expanded="false">
+            <span>Will MousePilot close tabs or accidentally click things on my screen?</span>
+            <span class="material-symbols-rounded text-lg text-brand-aqua transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-content px-5 pb-5 text-xs text-slate-300 leading-relaxed">
+            <strong>No, never.</strong> MousePilot is architected with a 100% zero-click guarantee. It exclusively translates coordinates via OS-level <code class="text-brand-aqua font-mono">SetCursorPos</code> and never simulates mouse down or click events.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden reveal-on-scroll">
+          <button class="faq-trigger w-full p-5 text-left font-bold text-sm text-white flex items-center justify-between" aria-expanded="false">
+            <span>Does MousePilot require Administrator privileges to run?</span>
+            <span class="material-symbols-rounded text-lg text-brand-aqua transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-content px-5 pb-5 text-xs text-slate-300 leading-relaxed">
+            No! MousePilot installs and runs entirely in user-space (<code class="text-brand-aqua font-mono">%LOCALAPPDATA%</code>) or standalone via the portable ZIP. You do not need admin rights.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden reveal-on-scroll">
+          <button class="faq-trigger w-full p-5 text-left font-bold text-sm text-white flex items-center justify-between" aria-expanded="false">
+            <span>What happens when I physically move my mouse while autopilot is running?</span>
+            <span class="material-symbols-rounded text-lg text-brand-aqua transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-content px-5 pb-5 text-xs text-slate-300 leading-relaxed">
+            MousePilot features continuous human takeover detection. The instant physical mouse movement velocity exceeds expected trajectory delta, autopilot immediately yields control and enters a 3-second auto-pause cooldown.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Grandmaster Multi-Column Footer -->
+  <footer class="pt-16 pb-12 px-6 border-t border-slate-800/90 bg-void relative">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Top Grid: 5 Structural Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-16 border-b border-slate-800/80">
+        
+        <!-- Column 1: Brand & Syndicate Bio (4 cols on lg) -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="flex items-center gap-3">
+            <img src="assets/logo.png" alt="MousePilot Tactical Cyber Wing Logo" class="w-10 h-10 rounded-xl object-contain border border-brand-aqua/40 p-0.5 bg-surface/90 shadow-md shadow-brand-aqua/10">
+            <div>
+              <span class="font-display font-black tracking-tight text-lg text-white">MOUSEPILOT</span>
+              <div class="text-[10px] font-mono font-bold text-brand-aqua uppercase tracking-widest mt-0.5">TAGX Labs™ Syndicate</div>
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+            Autonomous cursor keep-alive & anti-sleep utility for Windows. Engineered for software engineers, data analysts, and remote professionals. Maintains presence naturally with pure Win32 coordinate kinematics.
+          </p>
+        </div>
+
+        <!-- Column 2: Kinematics (2 cols on lg) -->
+        <div class="lg:col-span-2 space-y-3 font-mono text-xs">
+          <div class="font-display font-bold text-white text-xs uppercase tracking-wider mb-2 text-brand-aqua">Kinematics</div>
+          <ul class="space-y-2.5 text-slate-400">
+            <li><a href="#simulator" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">sync</span> Gentle Orbit</a></li>
+            <li><a href="#simulator" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">visibility_off</span> Stealth 1-Pixel</a></li>
+            <li><a href="#simulator" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">all_inclusive</span> Figure-8 Curve</a></li>
+            <li><a href="#simulator" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">shuffle</span> Random Wander</a></li>
+            <li><a href="#simulator" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">radar</span> Radar Telemetry</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Architecture & Safety (2 cols on lg) -->
+        <div class="lg:col-span-2 space-y-3 font-mono text-xs">
+          <div class="font-display font-bold text-white text-xs uppercase tracking-wider mb-2 text-brand-aqua">Architecture</div>
+          <ul class="space-y-2.5 text-slate-400">
+            <li><a href="#features" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">security</span> Zero-Click Policy</a></li>
+            <li><a href="#features" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">fingerprint</span> Velocity Auto-Yield</a></li>
+            <li><a href="#features" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-crimson">bolt</span> Kernel Thread Lock</a></li>
+            <li><a href="#features" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">timer</span> Delay & Timers</a></li>
+            <li><a href="#features" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">folder</span> Local AppData</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Downloads & Releases (2 cols on lg) -->
+        <div class="lg:col-span-2 space-y-3 font-mono text-xs">
+          <div class="font-display font-bold text-white text-xs uppercase tracking-wider mb-2 text-brand-aqua">Downloads</div>
+          <ul class="space-y-2.5 text-slate-400">
+            <li><a href="downloads/MousePilot-Setup-v1.0.0.exe" download class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">download</span> Setup (.exe)</a></li>
+            <li><a href="downloads/MousePilot-v1.0.0-Portable.zip" download class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">folder_zip</span> Portable (.zip)</a></li>
+            <li><a href="#releases" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">key</span> SHA-256 Hashes</a></li>
+            <li><a href="#releases" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">inventory_2</span> Release Archive</a></li>
+            <li><a href="#releases" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">rocket_launch</span> v1.1.0 Roadmap</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 5: Legal & TAGX Syndicate (2 cols on lg) -->
+        <div class="lg:col-span-2 space-y-3 font-mono text-xs">
+          <div class="font-display font-bold text-white text-xs uppercase tracking-wider mb-2 text-brand-aqua">TAGX Labs</div>
+          <ul class="space-y-2.5 text-slate-400">
+            <li><button onclick="openModal('privacyModal')" class="hover:text-brand-aqua transition-colors text-left flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">policy</span> Privacy Policy</button></li>
+            <li><button onclick="openModal('termsModal')" class="hover:text-brand-aqua transition-colors text-left flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">gavel</span> Terms of Service</button></li>
+            <li><button onclick="openModal('licenseModal')" class="hover:text-brand-aqua transition-colors text-left flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">article</span> MIT License</button></li>
+            <li><a href="#about" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">domain</span> About Syndicate</a></li>
+            <li><a href="#faq" class="hover:text-brand-aqua transition-colors flex items-center gap-2"><span class="material-symbols-rounded text-sm text-brand-aqua">help</span> FAQ & Help</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar: Centered Copyright -->
+      <div class="pt-8 text-center text-xs font-mono text-slate-500">
+        <span>© 2026 <strong>TAGX Labs™</strong>. All rights reserved.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ======================================================================= -->
+  <!-- MODALS -->
+  <!-- ======================================================================= -->
+
+  <!-- Privacy Policy Modal -->
+  <div id="privacyModal" class="modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="modal-content glass-card p-8 rounded-3xl max-w-lg w-full border border-brand-aqua/40 relative">
+      <button onclick="closeModal('privacyModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 flex items-center justify-center">
+        <span class="material-symbols-rounded text-xl">close</span>
+      </button>
+      <h3 class="text-xl font-display font-bold text-white mb-4">Privacy Policy (100% Local)</h3>
+      <div class="text-xs text-slate-300 space-y-3 font-mono leading-relaxed max-h-80 overflow-y-auto">
+        <p>• MousePilot by TAGX Labs™ is 100% offline software.</p>
+        <p>• Zero telemetry, zero analytic beacons, and zero server network requests are performed by this application.</p>
+        <p>• All configurations and state parameters are stored locally on your machine in <code class="text-brand-aqua">%LOCALAPPDATA%\MousePilot</code>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms Modal -->
+  <div id="termsModal" class="modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="modal-content glass-card p-8 rounded-3xl max-w-lg w-full border border-brand-aqua/40 relative">
+      <button onclick="closeModal('termsModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 flex items-center justify-center">
+        <span class="material-symbols-rounded text-xl">close</span>
+      </button>
+      <h3 class="text-xl font-display font-bold text-white mb-4">Terms of Service</h3>
+      <div class="text-xs text-slate-300 space-y-3 font-mono leading-relaxed max-h-80 overflow-y-auto">
+        <p>MousePilot is provided "as is", without warranty of any kind. You agree to use MousePilot in compliance with your organization's IT and remote work policies.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- License Modal -->
+  <div id="licenseModal" class="modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="modal-content glass-card p-8 rounded-3xl max-w-lg w-full border border-brand-aqua/40 relative">
+      <button onclick="closeModal('licenseModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 flex items-center justify-center">
+        <span class="material-symbols-rounded text-xl">close</span>
+      </button>
+      <h3 class="text-xl font-display font-bold text-white mb-4">MIT License</h3>
+      <div class="text-xs text-slate-300 space-y-3 font-mono leading-relaxed max-h-80 overflow-y-auto">
+        <p>Copyright (c) 2026 TAGX Labs™</p>
+        <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="glass-card px-5 py-3 rounded-2xl border border-brand-aqua flex items-center gap-3 shadow-2xl">
+    <span class="material-symbols-rounded text-brand-aqua text-lg">check_circle</span>
+    <span id="toastMessage" class="text-xs font-mono font-bold text-white">Copied to clipboard!</span>
+  </div>
+
+  <!-- Interactive Scripts -->
+  <script src="js/animations.js"></script>
+  <script src="js/interactive.js"></script>
+</body>
+</html>
