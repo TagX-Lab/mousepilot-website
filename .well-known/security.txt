@@ -1,0 +1,7 @@
+Contact: mailto:enbaraj.roovechander@karanodaka.com
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://tagx-lab.github.io/mousepilot-website/.well-known/security.txt
+Policy: https://github.com/TagX-Lab/mousepilot-website/blob/main/SECURITY.md
+Hiring: https://github.com/TagX-Lab
+Acknowledgments: https://github.com/TagX-Lab/mousepilot-website/blob/main/SECURITY.md#hall-of-fame

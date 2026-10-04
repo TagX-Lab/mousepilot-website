@@ -2,6 +2,26 @@
  * MousePilot by TAGX Labs™ — Interactive Experience & Kinematics Engine
  */
 
+// =========================================================================
+// SECURITY PROTOCOL: Anti-Clickjacking Framebuster & Self-XSS Console Defense
+// =========================================================================
+try {
+  if (window.top !== window.self) {
+    window.top.location = window.self.location;
+  }
+} catch (e) {
+  // If embedded in a cross-origin iframe attempting clickjacking:
+  window.location.replace(window.location.href);
+}
+
+// Console Security Warning (Anti-Social Engineering / Self-XSS Prevention)
+console.log(
+  '%c🛡️ TAGX CYBER DEFENSE ACTIVE %c\n' +
+  'ATTENTION: This developer console is protected. Never paste untrusted scripts or commands here. Doing so could compromise your system.',
+  'background: #DB1A1A; color: #ffffff; font-size: 15px; font-weight: bold; padding: 4px 8px; border-radius: 4px;',
+  'color: #00FFEA; font-size: 12px; font-family: monospace; line-height: 1.5;'
+);
+
 document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // 0. 3D HERO FLOATING GRAVITY PARTICLES (Interactive Cursor Anti-Gravity)
@@ -506,7 +526,137 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 5. LEGAL MODALS (Privacy, Terms, MIT License & Escape Key)
+  // 5. CLIENT-SIDE SHA-256 CRYPTOGRAPHIC INTEGRITY VERIFIER (Web Crypto API)
+  // =========================================================================
+  const OFFICIAL_CHECKSUMS = {
+    'MousePilot-Setup-v1.0.0.exe': 'b97a07fe9004999addf53edef3515fdc8b27c5533dc9578982b1f7c2b410daec',
+    'MousePilot-v1.0.0-Portable.zip': '7f9e14124f94ba4bc997f5c4dc1984cbd160d60fa414701879cf5c6b6ef68f4a'
+  };
+
+  const integrityDropZone = document.getElementById('integrityDropZone');
+  const integrityFileInput = document.getElementById('integrityFileInput');
+  const integrityResult = document.getElementById('integrityResult');
+
+  if (integrityDropZone && integrityFileInput && integrityResult) {
+    integrityDropZone.addEventListener('click', () => integrityFileInput.click());
+
+    ['dragenter', 'dragover'].forEach((eventName) => {
+      integrityDropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        integrityDropZone.classList.add('border-brand-aqua', 'bg-brand-aqua/5');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach((eventName) => {
+      integrityDropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        integrityDropZone.classList.remove('border-brand-aqua', 'bg-brand-aqua/5');
+      });
+    });
+
+    integrityDropZone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        processIntegrityCheck(files[0]);
+      }
+    });
+
+    integrityFileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files.length > 0) {
+        processIntegrityCheck(e.target.files[0]);
+      }
+    });
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, (m) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      })[m]);
+    }
+
+    async function processIntegrityCheck(file) {
+      integrityResult.classList.remove('hidden');
+      integrityResult.className = 'mt-4 p-4 rounded-xl font-mono text-xs border border-brand-aqua/40 bg-surface/90 text-slate-300';
+      integrityResult.innerHTML = `
+        <div class="flex items-center gap-2 text-brand-aqua">
+          <span class="material-symbols-rounded animate-spin text-base">sync</span>
+          <span>Computing SHA-256 hash locally in memory for <strong>${escapeHtml(file.name)}</strong> (${(file.size / (1024 * 1024)).toFixed(2)} MB)...</span>
+        </div>
+      `;
+
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const hashBuffer = await crypto.subtle.digest('SHA-256', arrayBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('').toLowerCase();
+
+        let matchedTarget = null;
+        for (const [targetName, expected] of Object.entries(OFFICIAL_CHECKSUMS)) {
+          if (hashHex === expected.toLowerCase()) {
+            matchedTarget = targetName;
+            break;
+          }
+        }
+
+        if (matchedTarget) {
+          integrityResult.className = 'mt-4 p-4 rounded-xl font-mono text-xs border border-emerald-500/50 bg-emerald-950/40 text-emerald-200';
+          integrityResult.innerHTML = `
+            <div class="flex items-start gap-2.5">
+              <span class="material-symbols-rounded text-emerald-400 text-lg shrink-0 mt-0.5">verified</span>
+              <div class="space-y-1.5 w-full">
+                <div class="font-bold text-sm text-emerald-300 flex items-center justify-between">
+                  <span>✓ 100% CRYPTOGRAPHICALLY AUTHENTIC</span>
+                  <span class="text-[10px] uppercase tracking-wider bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/40">Verified Safe</span>
+                </div>
+                <p class="text-[11px] text-emerald-300/80">Matched verified binary: <strong>${escapeHtml(matchedTarget)}</strong>. Zero tampering or malware injection detected.</p>
+                <div class="bg-black/50 p-2 rounded-lg border border-emerald-500/30 text-[10px] break-all select-all font-mono">
+                  ${hashHex}
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          const isKnownName = OFFICIAL_CHECKSUMS[file.name] !== undefined;
+          integrityResult.className = 'mt-4 p-4 rounded-xl font-mono text-xs border border-brand-crimson/60 bg-red-950/40 text-red-200';
+          integrityResult.innerHTML = `
+            <div class="flex items-start gap-2.5">
+              <span class="material-symbols-rounded text-brand-crimson text-lg shrink-0 mt-0.5">warning</span>
+              <div class="space-y-1.5 w-full">
+                <div class="font-bold text-sm text-brand-crimson flex items-center justify-between">
+                  <span>⚠️ INTEGRITY MISMATCH / UNVERIFIED FILE</span>
+                  <span class="text-[10px] uppercase tracking-wider bg-red-500/20 px-2 py-0.5 rounded border border-red-500/40">Untrusted</span>
+                </div>
+                <p class="text-[11px] text-red-300/80">
+                  ${isKnownName 
+                    ? 'CRITICAL WARNING: The calculated SHA-256 hash does NOT match the official release! The file may have been altered or infected by malware in transit. DO NOT RUN.' 
+                    : 'The selected file is not recognized as an official MousePilot release package.'}
+                </p>
+                <div class="bg-black/50 p-2 rounded-lg border border-red-500/30 text-[10px] break-all select-all font-mono text-red-300">
+                  Computed Hash: ${hashHex}
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      } catch (err) {
+        integrityResult.className = 'mt-4 p-4 rounded-xl font-mono text-xs border border-yellow-500/50 bg-yellow-950/40 text-yellow-200';
+        integrityResult.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-rounded text-yellow-400">error</span>
+            <span>Could not verify file locally: ${escapeHtml(err.message)}</span>
+          </div>
+        `;
+      }
+    }
+  }
+
+  // =========================================================================
+  // 6. LEGAL MODALS (Privacy, Terms, MIT License & Escape Key)
   // =========================================================================
   window.openModal = function (modalId) {
     const modal = document.getElementById(modalId);

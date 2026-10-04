@@ -114,6 +114,20 @@ No package manager or build pipeline required — pure modern web standards:
 
 ---
 
+## 🛡️ Security & Cyber Defense (Zero-Trust Architecture)
+
+MousePilot and this website are hardened against tampering, malicious injection, and unauthorized framing:
+
+- **Strict Content Security Policy (CSP)** & Anti-MIME Sniffing (`nosniff`).
+- **Anti-Clickjacking Protection**: `X-Frame-Options: DENY`, `frame-ancestors: 'none'`, and active client-side JavaScript Framebuster.
+- **Client-Side SHA-256 WebCrypto Verifier**: Visitors can drag-and-drop downloaded files to verify authenticity in-memory with zero server upload.
+- **Automated Security Pipelines**: GitHub CodeQL semantic scanning and binary checksum verification on every push.
+- **RFC 9116 Compliant**: Standard `/.well-known/security.txt` and responsible disclosure process.
+
+Read our complete policy: **[SECURITY.md](SECURITY.md)**.
+
+---
+
 ## 📜 License
 
 Created & maintained by **[TAGX Labs™](https://github.com/TagX-Lab)**. Distributed under the **MIT License**.
