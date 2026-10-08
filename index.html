@@ -775,15 +775,15 @@
         </div>
       </div>
 
-      <!-- Version Card 1.0.0 -->
-      <div class="glass-card p-8 rounded-3xl border border-brand-aqua/40 mb-6 reveal-on-scroll">
+      <!-- Version Card 1.0.1 (LATEST STABLE) -->
+      <div class="glass-card p-8 rounded-3xl border border-brand-aqua/50 mb-6 reveal-on-scroll shadow-xl shadow-brand-aqua/5">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <span class="text-2xl font-display font-bold text-white">MousePilot v1.0.0</span>
+              <span class="text-2xl font-display font-bold text-white">MousePilot v1.0.1</span>
               <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-brand-aqua/20 text-brand-aqua border border-brand-aqua/40">LATEST STABLE</span>
             </div>
-            <div class="text-xs text-slate-400 font-mono mt-1">Released: October 2026 • Windows 10 & 11 (64-bit)</div>
+            <div class="text-xs text-slate-400 font-mono mt-1">Released: October 2026 • Windows 10 & 11 (64-bit) • Full Spectrum Stability & Kinematics Patch</div>
           </div>
 
           <div class="flex items-center gap-3">
@@ -797,22 +797,65 @@
         </div>
 
         <div class="pt-6">
-          <h5 class="text-xs font-mono font-bold uppercase tracking-wider text-brand-aqua mb-3">Key Highlights in v1.0.0:</h5>
-          <ul class="space-y-2 text-xs text-slate-300 font-mono">
+          <h5 class="text-xs font-mono font-bold uppercase tracking-wider text-brand-aqua mb-3">Key Enhancements & Bug Fixes in v1.0.1:</h5>
+          <ul class="space-y-2.5 text-xs text-slate-300 font-mono">
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-rounded text-sm text-brand-aqua mt-0.5 shrink-0">verified</span>
+              <span><strong>Kinematics & Smooth Trajectories:</strong> Eliminated initial downward displacement in Orbit mode with organic 0px tangent ease-in; fixed angular phase wrapping continuity and Wander bounds progression.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-rounded text-sm text-brand-aqua mt-0.5 shrink-0">verified</span>
+              <span><strong>Calibrated Human Takeover:</strong> Tuned velocity threshold to 30px per tick (&gt;1,200 px/sec), ensuring immediate user takeover without fighting the user during natural cursor movement.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-rounded text-sm text-brand-aqua mt-0.5 shrink-0">verified</span>
+              <span><strong>Session Timers & Auto-Pause Compensation:</strong> Decoupled delay countdown from active session metrics; human takeovers now pause and extend the total session duration without burning active runtime.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-rounded text-sm text-brand-aqua mt-0.5 shrink-0">verified</span>
+              <span><strong>Hardware Safety Guard & Origin Lock:</strong> Full enforcement of <code class="text-brand-aqua">is_armed</code> lifecycle states across multi-monitor bounding configurations and coordinate origins <code class="text-brand-aqua">(0, 0)</code>.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-rounded text-sm text-brand-aqua mt-0.5 shrink-0">verified</span>
+              <span><strong>Windows Autostart & Launcher Integrity:</strong> Unified launch pipeline with <code class="text-brand-aqua">MousePilot.vbs</code> silent launcher and automatic error recovery if registry policies restrict autostart.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-rounded text-sm text-brand-aqua mt-0.5 shrink-0">verified</span>
+              <span><strong>UI, Tray & Telemetry Polish:</strong> System tray branding unified to MousePilot, live radar anchor memory reset between sessions, and zero-clamped digital clock countdowns.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Version Card 1.0.0 -->
+      <div class="glass-card p-8 rounded-3xl border border-slate-800/80 mb-6 reveal-on-scroll opacity-80 hover:opacity-100 transition-opacity">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xl font-display font-bold text-white">MousePilot v1.0.0</span>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-slate-800 text-slate-400 border border-slate-700">INITIAL RELEASE</span>
+            </div>
+            <div class="text-xs text-slate-400 font-mono mt-1">Released: October 2026 • Windows 10 & 11 (64-bit)</div>
+          </div>
+        </div>
+
+        <div class="pt-6">
+          <h5 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-3">Key Highlights in v1.0.0:</h5>
+          <ul class="space-y-2 text-xs text-slate-400 font-mono">
             <li class="flex items-center gap-2">
-              <span class="material-symbols-rounded text-sm text-brand-aqua">check_circle</span>
+              <span class="material-symbols-rounded text-sm text-slate-500">check_circle</span>
               <span>Official product launch under <strong>TAGX Labs™</strong> parent brand hierarchy.</span>
             </li>
             <li class="flex items-center gap-2">
-              <span class="material-symbols-rounded text-sm text-brand-aqua">check_circle</span>
+              <span class="material-symbols-rounded text-sm text-slate-500">check_circle</span>
               <span>4 Mathematical Kinematic Trajectory Modes (Orbit, Stealth 1-px, Figure-8, Wander).</span>
             </li>
             <li class="flex items-center gap-2">
-              <span class="material-symbols-rounded text-sm text-brand-aqua">check_circle</span>
+              <span class="material-symbols-rounded text-sm text-slate-500">check_circle</span>
               <span>Real-time velocity human takeover yield with 3s auto-pause cooldown.</span>
             </li>
             <li class="flex items-center gap-2">
-              <span class="material-symbols-rounded text-sm text-brand-aqua">check_circle</span>
+              <span class="material-symbols-rounded text-sm text-slate-500">check_circle</span>
               <span>First-run license & safety onboarding modal.</span>
             </li>
           </ul>

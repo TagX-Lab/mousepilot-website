@@ -529,8 +529,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. CLIENT-SIDE SHA-256 CRYPTOGRAPHIC INTEGRITY VERIFIER (Web Crypto API)
   // =========================================================================
   const OFFICIAL_CHECKSUMS = {
-    'MousePilot-Setup-v1.0.0.exe': 'b97a07fe9004999addf53edef3515fdc8b27c5533dc9578982b1f7c2b410daec',
-    'MousePilot-v1.0.0-Portable.zip': '7f9e14124f94ba4bc997f5c4dc1984cbd160d60fa414701879cf5c6b6ef68f4a'
+    'MousePilot-Setup-v1.0.0.exe': 'd1216cecb55a5005fa7fed328457fe6cd839c860cb668a66a4acf52fc0e9e601',
+    'MousePilot-v1.0.0-Portable.zip': 'fb2276b66253273577fdd02fba1886f3809d9faa95d35edd1141bb45fe82ef0c'
   };
 
   const integrityDropZone = document.getElementById('integrityDropZone');

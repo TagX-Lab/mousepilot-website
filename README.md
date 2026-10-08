@@ -29,6 +29,18 @@ The website is deployed and hosted live on GitHub Pages:
 
 ---
 
+## 🚀 Latest Release: v1.0.1 (October 2026)
+
+The **v1.0.1 Stable Patch** introduces comprehensive stability, kinematics, and safety enhancements:
+- 🌀 **Kinematics Refinement**: Zero initial jump on Orbit activation with smooth tangent ease-in, clean phase angle wrapping, and guaranteed Brownian drift progression.
+- 👤 **Calibrated Human Takeover**: Velocity delta threshold tuned to 30px per tick for frictionless user takeover during natural mouse movement.
+- ⏱️ **Timer & Auto-Pause Integrity**: Dedicated active timer decoupled from countdown delay; human takeover pause time is dynamically credited to session duration.
+- 🛡️ **Safety Guard State Machine**: Complete lifecycle enforcement of `is_armed` states across multi-monitor bounding configurations and coordinate origin locks.
+- ⚡ **Windows Autostart & Silent Launcher**: Hardened startup execution pipeline utilizing `MousePilot.vbs` with automatic permission recovery.
+- 📊 **UI & Telemetry Polish**: System tray branding unified to MousePilot, live radar anchor memory reset between sessions, and zero-clamped countdown HUD displays.
+
+---
+
 ## ✨ Website Architecture & Features
 
 This repository contains the complete production static website for MousePilot:
